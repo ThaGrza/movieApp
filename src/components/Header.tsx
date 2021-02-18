@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     paddingBottom: 20,
     justifyContent: "center",
+    borderRadius: 20
   },
   headerText: {
     fontWeight: "bold",

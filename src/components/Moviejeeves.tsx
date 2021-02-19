@@ -10,26 +10,32 @@ type MovieState = {
 
 
 class MovieJeeves extends React.Component<MovieState>{
-  state: MovieState = {
-    image: '',
-    title: '',
-    description: '',
-    id: 0,
+    state: MovieState = {
+      image: '',
+      title: '',
+      description: '',
+      id: 0,
   };
 
-  movieButton() {
-    alert("RANDOM MOVIE");
+  movieButton = ()  => {
+    this.setState({image: "https://scitechdaily.com/images/Great-White-Shark-Smile.jpg"})
   };
 
+  
   render() {
     return (
       <View style={styles.container}>
-        <Image source={this.state.image}/>
-        <View style={styles.button}>
-        <Button
-          onPress={this.movieButton}
-          title="Random Movie"
-          />
+        <View style={styles.movieDispay}>
+          <Image source={{
+            uri: this.state.image}}
+            style={{width: 400, height: 200}}/>
+
+          <View style={styles.button}>
+          <Button
+            onPress={this.movieButton}
+            title="Random Movie"
+            />
+          </View>
         </View>
       </View>
     );
@@ -39,15 +45,18 @@ class MovieJeeves extends React.Component<MovieState>{
 const styles = StyleSheet.create({
   container: {
     alignContent: "center",
+    marginLeft: "auto",
+    marginRight: "auto"
   },
   button: {
+    width: 100,
     backgroundColor: "red",
-    display: "flex",
     alignContent: "center",
-    width: 200,
-    marginLeft: 100,
     marginTop: 100,
-
+    borderRadius: 20,
+  },
+  movieDispay: {
+    // styles
   }
 }); 
 

@@ -4,22 +4,38 @@
 },
 {
   "name": "Comedy",
-  "id":1
+  "id":35
 },
 {
   "name": "Horror",
-  "id":2
+  "id":27
+},
+{
+  "name": "Documentaries",
+  "id":99
+},
+{
+  "name": "Romance",
+  "id":10749
+},
+{
+  "name": "Animation",
+  "id":16
 },
 {
   "name": "Drama",
-  "id":3
+  "id":18
 },
 {
-  "name": "Anime",
-  "id":4
+  "name": "Mystery",
+  "id":9648
 },
 {
-  "name": "Thriller",
-  "id":5
+  "name": "Western",
+  "id":37
+},
+{
+  "name": "Science Fiction",
+  "id":878
 }
 ]

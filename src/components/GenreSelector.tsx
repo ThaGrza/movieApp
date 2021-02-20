@@ -12,8 +12,7 @@ const GenreSelector = () => {
       {genres.map((genre) =>
       <Button key={genre.id}
       title={genre.name}
-      onPress={MovieJeeves(genre.id)}
-      style={styles.genreButtons}
+      onPress={() => MovieJeeves(genre.id)}
       />)}
     </View>
   );
@@ -23,8 +22,6 @@ export default GenreSelector;
 
 const styles = StyleSheet.create({
   genreButtons: {
-    display: "flex",
-    color: "yellow",
   },
   buttonContainer: {
     display: "flex",

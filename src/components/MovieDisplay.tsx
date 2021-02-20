@@ -9,7 +9,6 @@ type MovieState = {
   id: number;
 };
 
-
 class MovieDisplay extends React.Component<MovieState>{
     state: MovieState = {
       image: 'placeholder',

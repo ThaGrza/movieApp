@@ -1,0 +1,25 @@
+[{
+  "name": "Action",
+  "id":28
+},
+{
+  "name": "Comedy",
+  "id":1
+},
+{
+  "name": "Horror",
+  "id":2
+},
+{
+  "name": "Drama",
+  "id":3
+},
+{
+  "name": "Anime",
+  "id":4
+},
+{
+  "name": "Thriller",
+  "id":5
+}
+]

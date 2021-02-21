@@ -1,12 +1,29 @@
 import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
 
-const MovieJeeves = (movie: number) => {
-  alert(movie);
-  // Recieves movie ID
-  // api call 
-  // get random movie from list
-  // set movie object to state
+type MovieState = {
+  image: string;
+  title: string;
+  description: string;
+  id: number;
 };
+
+class MovieJeeves extends React.Component<MovieState>{
+  state: MovieState = {
+    image: 'placeholder',
+    title: '',
+    description: '',
+    id: 0,
+  }
+  render(){
+    return(
+      <View>
+        <Text>Button</Text>
+      </View>
+    )
+  }
+};
+
 
 export default MovieJeeves;

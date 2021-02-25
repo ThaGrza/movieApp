@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Button, Image, Text, StyleSheet } from 'react-native';
 
-
+// turn into class for holding movie state / info.
 const MovieDisplay = () => {
   return(
     <View style={styles.container}>

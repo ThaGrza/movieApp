@@ -6,7 +6,6 @@ import genres from '../../assets/genreInfo.json';
 
 
 const GenreSelector = () => {
-  
   return(
     <SafeAreaView style={styles.buttonContainer}>
       <FlatList horizontal data={genres}
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   button: {
-    backgroundColor: "green",
+    backgroundColor: "red",
     margin: 5,
     marginRight: 2,
     borderRadius: 5,

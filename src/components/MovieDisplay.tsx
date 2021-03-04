@@ -1,14 +1,32 @@
 import React from 'react';
 import {View, Button, Image, Text, StyleSheet } from 'react-native';
 
-// turn into class for holding movie state / info.
-const MovieDisplay = () => {
-  return(
-    <View style={styles.container}>
-      <Text style={styles.movieDispay}>Movie Image Here.</Text>
+type Moviestate = {
+  title: string;
+  id: number;
+  movieImg: string;
+  description: string;
+  date: number;
+  cast: string;
+}
+export default class MovieDisplay extends React.Component<Moviestate>{
+    state: Moviestate = {
+      title: "",
+      id: 0,
+      movieImg: "",
+      description: "",
+      date: 0,
+      cast: "",
+    }
+  render(){
+    return(
+    <View>
+      <Text>Movie Display Image</Text>
     </View>
-  );
-};
+    )
+  }
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -27,5 +45,3 @@ const styles = StyleSheet.create({
     // styles
   }
 }); 
-
-export default MovieDisplay;

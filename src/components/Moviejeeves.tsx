@@ -1,18 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import axios from './axios';
 
-
-type MovieState = {
-  image: string;
-  title: string;
-  description: string;
-  id: number;
-};
 // similar movie function
 
 const MovieJeeves = (id: number) => {
-  alert("You clicked genre with " + id + " id.");
-  // call api with id.
+  useEffect(() => {
+    const request = axios.get(id)
+  })
   // use math.random to get random movie from list.
   // set display state with random movie.
   return(

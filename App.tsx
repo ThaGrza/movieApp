@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import Header from './src/components/Header'
 import MovieDisplay from './src/components/MovieDisplay'
 import GenreSelector from './src/components/GenreSelector';
-import SearchButton from './src/components/SearchButton';
 
 
 
@@ -16,7 +15,6 @@ export default function Container() {
       <Header />
       <MovieDisplay />
       <GenreSelector />
-      <SearchButton />
     </View>
   );
 }

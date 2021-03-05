@@ -7,7 +7,6 @@ type Moviestate = {
   movieImg: string;
   description: string;
   date: number;
-  cast: string;
 }
 export default class MovieDisplay extends React.Component<Moviestate>{
     state: Moviestate = {
@@ -15,18 +14,17 @@ export default class MovieDisplay extends React.Component<Moviestate>{
       id: 0,
       movieImg: "",
       description: "",
-      date: 0,
-      cast: "",
+      date: 0
     }
   render(){
     return(
-    <View>
-      <Text>Movie DisplayIODJGOIDFJGOJDFJIOI Image</Text>
+    <View style = {styles.movieImage} >
+      <Image style = {styles.movieImage} source={{uri: "https://scitechdaily.com/images/Great-White-Shark-Smile.jpg" }} />
+      <Text style = {styles.movieInfo} >Movie harlow Image</Text>
     </View>
     )
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -41,7 +39,11 @@ const styles = StyleSheet.create({
     marginTop: 100,
     borderRadius: 20,
   },
-  movieDispay: {
-    // styles
+  movieInfo: {
+    // css stuff
+  },
+  movieImage: {
+    width: 400,
+    height: 300,
   }
 }); 

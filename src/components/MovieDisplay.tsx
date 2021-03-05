@@ -21,7 +21,7 @@ export default class MovieDisplay extends React.Component<Moviestate>{
   render(){
     return(
     <View>
-      <Text>Movie Display Image</Text>
+      <Text>Movie DisplayIODJGOIDFJGOJDFJIOI Image</Text>
     </View>
     )
   }

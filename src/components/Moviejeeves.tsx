@@ -1,15 +1,20 @@
 import React, {useEffect} from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import Axios from 'axios';
-import apiKey from 'react-native-dotenv';
 
-const baseUrl: string = "https://api.themoviedb.org/3/movie/discover/movie?api_key=";
+// import { API_KEY } from '@env';
+
+
+const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?api_key=";
+const genreUrl: string = "&with_genres="
 // similar movie function
 
 const MovieJeeves = (id: number) => {
-  let query: any = baseUrl + apiKey + id;
+  let query: any = baseUrl + apiKey + genreUrl + id;
+  let movie
   Axios.get(query)
     .then(res => {
+
       console.log(res);
     })
     .catch(err => {

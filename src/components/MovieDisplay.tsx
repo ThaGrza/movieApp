@@ -1,9 +1,12 @@
 import React from 'react';
 import {View, Button, Image, Text, StyleSheet } from 'react-native';
 
+
+// ADD TO IMAGE SOURCE + IMG STATE FOR POSTER
+// https://image.tmdb.org/t/p/w500/
+
 type Moviestate = {
   title: string;
-  id: number;
   movieImg: string;
   description: string;
   date: number;
@@ -11,11 +14,19 @@ type Moviestate = {
 export default class MovieDisplay extends React.Component<Moviestate>{
     state: Moviestate = {
       title: "",
-      id: 0,
       movieImg: "",
       description: "",
       date: 0
     }
+    movieSetter = (movie: any) => {
+      this.setState({title: movie.original_title});
+      this.setState({movieImg: movie.poster_path});
+      this.setState({description: movie.overview});
+      this.setState({date: movie.release_date});
+      console.log("THIS IS BEING LOGGED FROM MOVIEDISPLAY COMP");
+      console.log(this.state.title);
+    }
+
   render(){
     return(
     <View style = {styles.movieImage} >

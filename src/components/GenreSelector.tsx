@@ -4,7 +4,6 @@ import MovieJeeves from './MovieJeeves';
 import genres from '../../assets/genreInfo.json';
 
 
-
 const GenreSelector = () => {
   return(
     <SafeAreaView style={styles.buttonContainer}>

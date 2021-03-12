@@ -5,7 +5,7 @@ import { View, StyleSheet, Text } from 'react-native';
 const Header = () => {
   return(
     <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>GUMBALL MOVIES</Text>
+      <Text style={styles.headerText}>chewchew MOVIES</Text>
       <Text style={styles.headerSubText}>Randomize Your Movie Night</Text>
     </View>
   )

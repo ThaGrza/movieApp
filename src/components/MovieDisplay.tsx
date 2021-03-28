@@ -1,42 +1,29 @@
-import React from 'react';
-import {View, Button, Image, Text, StyleSheet } from 'react-native';
-
+import React, { useState, useEffect } from 'react';
+import {View, Image, Text, StyleSheet } from 'react-native';
 
 // ADD TO IMAGE SOURCE + IMG STATE FOR POSTER
-// https://image.tmdb.org/t/p/w500/
+const movieImg: string = "https://image.tmdb.org/t/p/w500/"
 
-type Moviestate = {
-  title: string;
-  movieImg: string;
-  description: string;
-  date: number;
-}
-export default class MovieDisplay extends React.Component<Moviestate>{
-    state: Moviestate = {
-      title: "",
-      movieImg: "",
-      description: "",
-      date: 0
-    }
-    movieSetter = (movie: any) => {
-      this.setState({title: movie.original_title});
-      this.setState({movieImg: movie.poster_path});
-      this.setState({description: movie.overview});
-      this.setState({date: movie.release_date});
-      console.log("THIS IS BEING LOGGED FROM MOVIEDISPLAY COMP");
-      console.log(this.state.title);
-    }
+const MovieDisplay = (movie: object) => {
+  const [title, setTitle] = useState();
+  const [movieImg, setMovieImg] = useState();
+  const [overview, setOverview] = useState();
+  const [releaseDate, setReleaseDate] = useState();
 
-  render(){
-    return(
+
+  useEffect(() => {
+    setTitle(movie.original_title);
+    console.log(title);
+  });
+
+ 
+  return(
     <View style = {styles.movieImage} >
-      <Image style = {styles.movieImage} source={{uri: "https://scitechdaily.com/images/Great-White-Shark-Smile.jpg" }} />
-      <Text style = {styles.movieInfo} >Movie harlow Image</Text>
+      <Image style = {styles.movieImage} source={{uri: movieImg }} />
+      <Text style = {styles.movieInfo} >{title}</Text>
     </View>
-    )
-  }
-}
-
+  )
+};
 const styles = StyleSheet.create({
   container: {
     alignContent: "center",
@@ -58,3 +45,5 @@ const styles = StyleSheet.create({
     height: 300,
   }
 }); 
+
+export default MovieDisplay;

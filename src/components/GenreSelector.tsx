@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, SafeAreaView, TouchableHighlight, Text } from 'react-native';
+import { useState } from 'React';
 import MovieJeeves from './MovieJeeves';
 import genres from '../../assets/genreInfo.json';
-
 
 const GenreSelector = () => {
   return(

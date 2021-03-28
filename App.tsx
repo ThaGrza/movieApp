@@ -14,7 +14,6 @@ export default function Container() {
     <View style={styles.container}>
       <Header />
       <MovieDisplay />
-      <GenreSelector />
     </View>
   );
 }

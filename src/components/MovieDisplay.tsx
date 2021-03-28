@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import {View, Image, Text, StyleSheet } from 'react-native';
 import GenreSelector from './GenreSelector';
 import Axios from 'axios';
-// ADD TO IMAGE SOURCE + IMG STATE FOR POSTER
+import { API_KEY } from '@env';
+
 const baseImageUrl: any = "https://image.tmdb.org/t/p/w500/"
-const apiKey = "5f9630b664fee3f1c639e0ae94090867";
 const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?api_key=";
 const genreUrl: string = "&with_genres=";
 
@@ -19,7 +19,9 @@ const MovieDisplay = (movie: object) => {
 
 
   const movieJeeves = (movieId: number) => {
-    let query: any = baseUrl + apiKey + genreUrl + movieId;
+    let query: any = baseUrl + API_KEY + genreUrl + movieId;
+    console.log(query);
+    console.log(API_KEY);
     let movie = {};
     Axios.get(query)
       .then(res => {

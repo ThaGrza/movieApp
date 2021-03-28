@@ -20,8 +20,6 @@ const MovieDisplay = (movie: object) => {
 
   const movieJeeves = (movieId: number) => {
     let query: any = baseUrl + API_KEY + genreUrl + movieId;
-    console.log(query);
-    console.log(API_KEY);
     let movie = {};
     Axios.get(query)
       .then(res => {

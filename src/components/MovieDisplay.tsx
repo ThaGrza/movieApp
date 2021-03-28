@@ -1,41 +1,52 @@
-import React from 'react';
-import {View, Button, Image, Text, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {View, Image, Text, StyleSheet } from 'react-native';
+import GenreSelector from './GenreSelector';
+import Axios from 'axios';
+import { API_KEY } from '@env';
+
+const baseImageUrl: any = "https://image.tmdb.org/t/p/w500/"
+const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?api_key=";
+const genreUrl: string = "&with_genres=";
 
 
-// ADD TO IMAGE SOURCE + IMG STATE FOR POSTER
-// https://image.tmdb.org/t/p/w500/
 
-type Moviestate = {
-  title: string;
-  movieImg: string;
-  description: string;
-  date: number;
-}
-export default class MovieDisplay extends React.Component<Moviestate>{
-    state: Moviestate = {
-      title: "",
-      movieImg: "",
-      description: "",
-      date: 0
-    }
-    movieSetter = (movie: any) => {
-      this.setState({title: movie.original_title});
-      this.setState({movieImg: movie.poster_path});
-      this.setState({description: movie.overview});
-      this.setState({date: movie.release_date});
-      console.log("THIS IS BEING LOGGED FROM MOVIEDISPLAY COMP");
-      console.log(this.state.title);
-    }
 
-  render(){
-    return(
-    <View style = {styles.movieImage} >
-      <Image style = {styles.movieImage} source={{uri: "https://scitechdaily.com/images/Great-White-Shark-Smile.jpg" }} />
-      <Text style = {styles.movieInfo} >Movie harlow Image</Text>
-    </View>
-    )
+const MovieDisplay = (movie: object) => {
+  const [title, setTitle] = useState();
+  const [movieImg, setMovieImg] = useState();
+  const [overview, setOverview] = useState();
+  const [releaseDate, setReleaseDate] = useState();
+
+
+  const movieJeeves = (movieId: number) => {
+    let query: any = baseUrl + API_KEY + genreUrl + movieId;
+    console.log(query);
+    console.log(API_KEY);
+    let movie = {};
+    Axios.get(query)
+      .then(res => {
+        movie = res.data.results[Math.floor(Math.random() * res.data.results.length)];
+        setTitle(movie.original_title);
+        setMovieImg(baseImageUrl + movie.poster_path);
+        setOverview(movie.overview);
+        setReleaseDate(movie.release_date);
+      })
+      .catch(err => {
+        console.log(err);
+      }) 
   }
-}
+
+
+  return(
+    <View style = {styles.movieImage} >
+      <Image style = {styles.movieImage} source={{uri: movieImg }} />
+      <Text style = {styles.movieInfo} >{title}</Text>
+      <Text style = {styles.movieInfo} >{releaseDate}</Text>
+      <Text style = {styles.movieInfo} >{overview}</Text>
+      <GenreSelector onPress={value => movieJeeves(value)} />
+    </View>
+  )
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -58,3 +69,5 @@ const styles = StyleSheet.create({
     height: 300,
   }
 }); 
+
+export default MovieDisplay;

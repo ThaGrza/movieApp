@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, SafeAreaView, TouchableHighlight, Text } from 'react-native';
+import { useState } from 'React';
 import MovieJeeves from './MovieJeeves';
 import genres from '../../assets/genreInfo.json';
 
-
-const GenreSelector = () => {
+const GenreSelector = (props) => {
   return(
     <SafeAreaView style={styles.buttonContainer}>
       <FlatList horizontal data={genres}
       renderItem={({ item }) => (
-        <TouchableHighlight onPress={() => MovieJeeves(item.id)}>
+        <TouchableHighlight onPress={event => props.onPress(item.id)}>
           <View>
             <Text style={styles.button}>{item.name}</Text>
           </View>

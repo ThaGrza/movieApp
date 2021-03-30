@@ -7,7 +7,7 @@ import { API_KEY } from '@env';
 const baseImageUrl: any = "https://image.tmdb.org/t/p/w500/"
 const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?api_key=";
 const genreUrl: string = "&with_genres=";
-
+const baseReleaseDate: string = "Release Date: ";
 
 
 
@@ -17,11 +17,12 @@ const MovieDisplay = (movie: object) => {
   const [overview, setOverview] = useState();
   const [releaseDate, setReleaseDate] = useState();
 
+  const truncate = (str: string , n: number) => {
+    return str?.length > n ? str.substr(0, n -1) + ' ...' : str;
+  } 
 
   const movieJeeves = (movieId: number) => {
     let query: any = baseUrl + API_KEY + genreUrl + movieId;
-    console.log(query);
-    console.log(API_KEY);
     let movie = {};
     Axios.get(query)
       .then(res => {
@@ -29,7 +30,7 @@ const MovieDisplay = (movie: object) => {
         setTitle(movie.original_title);
         setMovieImg(baseImageUrl + movie.poster_path);
         setOverview(movie.overview);
-        setReleaseDate(movie.release_date);
+        setReleaseDate(baseReleaseDate + movie.release_date);
       })
       .catch(err => {
         console.log(err);
@@ -38,35 +39,44 @@ const MovieDisplay = (movie: object) => {
 
 
   return(
-    <View style = {styles.movieImage} >
+    <View style = {styles.container} >
       <Image style = {styles.movieImage} source={{uri: movieImg }} />
-      <Text style = {styles.movieInfo} >{title}</Text>
-      <Text style = {styles.movieInfo} >{releaseDate}</Text>
-      <Text style = {styles.movieInfo} >{overview}</Text>
-      <GenreSelector onPress={value => movieJeeves(value)} />
+      <Text style = {styles.movieTitle} >{title}</Text>
+      <Text style = {styles.releaseDate} >{releaseDate}</Text>
+      <Text style = {styles.overview} >{truncate(overview, 300)}</Text>
+      <GenreSelector onPress={(value: number) => movieJeeves(value)} />
     </View>
   )
 };
 
 const styles = StyleSheet.create({
   container: {
+    height: '75%',
     alignContent: "center",
-    marginLeft: "auto",
-    marginRight: "auto"
+    marginLeft: 5,
+    marginRight: 5,
   },
-  button: {
-    width: 100,
-    backgroundColor: "red",
-    alignContent: "center",
-    marginTop: 100,
-    borderRadius: 20,
+  releaseDate: {
+    fontSize: 16, 
+    textAlign: 'center',
+    fontWeight: '600',
   },
-  movieInfo: {
-    // css stuff
+  movieTitle: {
+    paddingTop: 5,
+    fontSize: 26,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  overview: {
+    fontSize: 18,
+    fontWeight: '500',
+    marginTop: 20,
+    marginRight: 5,
+    marginLeft: 5
   },
   movieImage: {
     width: 400,
-    height: 300,
+    height: 400,
   }
 }); 
 

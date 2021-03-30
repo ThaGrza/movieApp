@@ -1,17 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, SafeAreaView, TouchableHighlight, Text } from 'react-native';
-import { useState } from 'React';
-import MovieJeeves from './MovieJeeves';
 import genres from '../../assets/genreInfo.json';
 
 const GenreSelector = (props) => {
   return(
     <SafeAreaView style={styles.buttonContainer}>
-      <FlatList horizontal data={genres}
+      <FlatList showsHorizontalScrollIndicator={false} horizontal data={genres}
       renderItem={({ item }) => (
-        <TouchableHighlight onPress={event => props.onPress(item.id)}>
+        <TouchableHighlight style={styles.flatList} onPress={event => props.onPress(item.id)}>
           <View>
-            <Text style={styles.button}>{item.name}</Text>
+            <Text style={styles.flatListText}>{item.name}</Text>
           </View>
         </TouchableHighlight>
       )}
@@ -24,16 +22,18 @@ export default GenreSelector;
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    flexDirection: "row",
-    fontSize: 20,
+    position: 'absolute',
+    bottom: -100,
+    display: 'flex',
   },
-  button: {
-    backgroundColor: "red",
-    margin: 5,
-    marginRight: 2,
+  flatList: {
+    backgroundColor: "#FE71D8",
+    marginRight: 10,
     borderRadius: 5,
-    padding: 5,
   },
-  buttonText: {
+  flatListText: {
+    fontWeight: '600',
+    fontSize: 18,
+    padding: 5,
   }
 });

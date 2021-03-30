@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
   container: {
     height: '75%',
     alignContent: "center",
-    marginLeft: "auto",
-    marginRight: "auto"
+    marginLeft: 5,
+    marginRight: 5,
   },
   releaseDate: {
     fontSize: 16, 

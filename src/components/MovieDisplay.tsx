@@ -17,6 +17,9 @@ const MovieDisplay = (movie: object) => {
   const [overview, setOverview] = useState();
   const [releaseDate, setReleaseDate] = useState();
 
+  const truncate = (str: string , n: number) => {
+    return str?.length > n ? str.substr(0, n -1) + '...' : str;
+  } 
 
   const movieJeeves = (movieId: number) => {
     let query: any = baseUrl + API_KEY + genreUrl + movieId;
@@ -40,8 +43,8 @@ const MovieDisplay = (movie: object) => {
       <Image style = {styles.movieImage} source={{uri: movieImg }} />
       <Text style = {styles.movieInfo} >{title}</Text>
       <Text style = {styles.movieInfo} >{releaseDate}</Text>
-      <Text style = {styles.movieInfo} >{overview}</Text>
-      <GenreSelector onPress={value => movieJeeves(value)} />
+      <Text style = {styles.movieInfo} >{truncate(overview, 150)}</Text>
+      <GenreSelector onPress={(value: number) => movieJeeves(value)} />
     </View>
   )
 };
@@ -52,19 +55,13 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto"
   },
-  button: {
-    width: 100,
-    backgroundColor: "red",
-    alignContent: "center",
-    marginTop: 100,
-    borderRadius: 20,
-  },
   movieInfo: {
-    // css stuff
+
+    fontSize: 18,
   },
   movieImage: {
     width: 400,
-    height: 300,
+    height: 400,
   }
 }); 
 

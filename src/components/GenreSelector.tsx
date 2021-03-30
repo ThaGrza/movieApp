@@ -1,7 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, SafeAreaView, TouchableHighlight, Text } from 'react-native';
-import { useState } from 'React';
-import MovieJeeves from './MovieJeeves';
 import genres from '../../assets/genreInfo.json';
 
 const GenreSelector = (props) => {
@@ -24,16 +22,15 @@ export default GenreSelector;
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    flexDirection: "row",
-    fontSize: 20,
+    display: 'flex',
   },
   button: {
-    backgroundColor: "red",
+    backgroundColor: "#FE71D8",
+    fontSize: 15,
+    width: '100%',
     margin: 5,
     marginRight: 2,
     borderRadius: 5,
     padding: 5,
-  },
-  buttonText: {
   }
 });

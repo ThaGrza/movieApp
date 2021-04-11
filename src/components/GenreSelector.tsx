@@ -2,6 +2,9 @@ import React from 'react';
 import { View, StyleSheet, FlatList, SafeAreaView, TouchableHighlight, Text } from 'react-native';
 import genres from '../../assets/genreInfo.json';
 
+
+
+
 const GenreSelector = (props) => {
   return(
     <SafeAreaView style={styles.buttonContainer}>
@@ -23,15 +26,16 @@ export default GenreSelector;
 const styles = StyleSheet.create({
   buttonContainer: {
     position: 'absolute',
-    bottom: -100,
+    bottom: 20,
     display: 'flex',
   },
   flatList: {
-    backgroundColor: "#FE71D8",
+    backgroundColor: '#ec1b35', 
     marginRight: 10,
     borderRadius: 5,
   },
   flatListText: {
+    color: 'white',
     fontWeight: '600',
     fontSize: 18,
     padding: 5,

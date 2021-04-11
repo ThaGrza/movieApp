@@ -11,10 +11,6 @@
   "id":27
 },
 {
-  "name": "Documentaries",
-  "id":99
-},
-{
   "name": "Romance",
   "id":10749
 },
@@ -29,6 +25,10 @@
 {
   "name": "Mystery",
   "id":9648
+},
+{
+  "name": "Documentaries",
+  "id":99
 },
 {
   "name": "Western",

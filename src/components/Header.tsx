@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontWeight: "bold",
-    color: '#E2183A',
     fontSize: 36,
+    color: '#960dee', 
   },
   headerSubText: {
-    color: '#E2183A',
     fontWeight: '600',
+    color: '#960dee', 
     fontSize: 19
   }
 })

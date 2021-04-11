@@ -10,33 +10,38 @@ const genreUrl: string = "&with_genres=";
 const baseReleaseDate: string = "Release Date: ";
 
 
-
 const MovieDisplay = (movie: object) => {
+  const [genreId, setGenreId] = useState();
   const [title, setTitle] = useState();
   const [movieImg, setMovieImg] = useState();
   const [overview, setOverview] = useState();
   const [releaseDate, setReleaseDate] = useState();
 
-  const truncate = (str: string , n: number) => {
-    return str?.length > n ? str.substr(0, n -1) + ' ...' : str;
-  } 
-
-  const movieJeeves = (movieId: number) => {
-    let query: any = baseUrl + API_KEY + genreUrl + movieId;
-    let movie = {};
+  const movieJeeves = (id: number) => {
+    let query: any = baseUrl + API_KEY + genreUrl + id;
+    let movie: any = {};
     Axios.get(query)
       .then(res => {
         movie = res.data.results[Math.floor(Math.random() * res.data.results.length)];
+        setGenreId(movie.id);
         setTitle(movie.original_title);
         setMovieImg(baseImageUrl + movie.poster_path);
         setOverview(movie.overview);
-        setReleaseDate(baseReleaseDate + movie.release_date);
+        formatRelease(movie.release_date);
       })
       .catch(err => {
         console.log(err);
       }) 
   }
 
+  const truncate = (str: string , n: number) => {
+    return str?.length > n ? str.substr(0, n -1) + ' ...' : str;
+  } 
+  
+  const formatRelease = (releaseDate: string) => {
+    let date = releaseDate.split("-");
+    setReleaseDate(baseReleaseDate + date[0]);
+  }
 
   return(
     <View style = {styles.container} >
@@ -51,33 +56,35 @@ const MovieDisplay = (movie: object) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '75%',
     alignContent: "center",
-    marginLeft: 5,
-    marginRight: 5,
   },
   releaseDate: {
-    fontSize: 16, 
-    textAlign: 'center',
-    fontWeight: '600',
+    fontSize: 16,
+    textAlign: "center",
+    fontWeight: "600",
   },
   movieTitle: {
+    color: '#1c1f1f',
+    height: 40,
     paddingTop: 5,
     fontSize: 26,
-    fontWeight: '600',
-    textAlign: 'center',
+    fontWeight: "900",
+    textAlign: "center",
   },
   overview: {
+    height: 250,
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: "500",
     marginTop: 20,
     marginRight: 5,
-    marginLeft: 5
+    marginLeft: 5,
   },
   movieImage: {
+    marginLeft: "1.5%",
+    marginRight: "1.5%",
     width: 400,
     height: 400,
-  }
+  },
 }); 
 
 export default MovieDisplay;

@@ -5,10 +5,12 @@ import Axios from 'axios';
 import { API_KEY } from '@env';
 
 const baseImageUrl: any = "https://image.tmdb.org/t/p/w500/"
-const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?api_key=";
+const baseUrl: string = "https://api.themoviedb.org/3/discover/movie/?api_key=";
+// /movie/{movie_id}/watch/providers
 const genreUrl: string = "&with_genres=";
+// const providerUrl: string = "&with_watch_providers=";
 const baseReleaseDate: string = "Release Date: ";
-
+const providerUrl: string = "/watch/providers?api_key=5f9630b664fee3f1c639e0ae94090867&language=en-us"
 
 const MovieDisplay = (movie: object) => {
   const [genreId, setGenreId] = useState();
@@ -17,13 +19,32 @@ const MovieDisplay = (movie: object) => {
   const [overview, setOverview] = useState();
   const [releaseDate, setReleaseDate] = useState();
 
-  const movieJeeves = (id: number) => {
-    let query: any = baseUrl + API_KEY + genreUrl + id;
-    let movie: any = {};
+
+  const getProviders = (id: number) => {
+    let providerId: number = id;
+    let query: any = "https://api.themoviedb.org/3/movie/" + providerId + providerUrl;
+    console.log(query);
     Axios.get(query)
       .then(res => {
+        console.log(res.data.results.US.rent)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  const movieJeeves = (id: number) => {
+    let pageNumber: number = Math.floor(Math.random() * 100);
+    let query: any = baseUrl + API_KEY + genreUrl + id + "&page=" + pageNumber;
+    let movie: any = {};
+    console.log("PAGE NUMBER: ", pageNumber);
+    Axios.get(query)
+      .then(res => {
+        // console.log(res);
         movie = res.data.results[Math.floor(Math.random() * res.data.results.length)];
-        setGenreId(movie.id);
+        console.log("MOVIE: ", movie);
+        getProviders(movie.id);
+        // setGenreId(movie.id);
         setTitle(movie.original_title);
         setMovieImg(baseImageUrl + movie.poster_path);
         setOverview(movie.overview);
@@ -34,7 +55,7 @@ const MovieDisplay = (movie: object) => {
       }) 
   }
 
-  const truncate = (str: string , n: number) => {
+  const truncate = (str: any , n: number) => {
     return str?.length > n ? str.substr(0, n -1) + ' ...' : str;
   } 
   

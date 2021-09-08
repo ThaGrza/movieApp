@@ -5,7 +5,7 @@ import genres from '../../assets/genreInfo.json';
 
 
 
-const GenreSelector = (props) => {
+const GenreSelector = (props: any) => {
   return(
     <SafeAreaView style={styles.buttonContainer}>
       <FlatList showsHorizontalScrollIndicator={false} horizontal data={genres}

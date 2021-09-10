@@ -26,18 +26,19 @@ export default GenreSelector;
 const styles = StyleSheet.create({
   buttonContainer: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 0,
     display: 'flex',
   },
   flatList: {
     backgroundColor: '#ec1b35', 
-    marginRight: 10,
-    borderRadius: 5,
+    margin: 5,
+    borderRadius: 10,
+    padding: 10
   },
   flatListText: {
     color: 'white',
     fontWeight: '600',
-    fontSize: 18,
+    fontSize: 24,
     padding: 5,
   }
 });

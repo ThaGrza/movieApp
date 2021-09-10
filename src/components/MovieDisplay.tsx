@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {View, Image, Text, StyleSheet } from 'react-native';
+import {View, Image, Text, StyleSheet, Button } from 'react-native';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import GenreSelector from './GenreSelector';
 import Axios from 'axios';
 import { API_KEY } from '@env';
@@ -9,7 +10,7 @@ const baseUrl: string = "https://api.themoviedb.org/3/discover/movie/?api_key=";
 // /movie/{movie_id}/watch/providers
 const genreUrl: string = "&with_genres=";
 // const providerUrl: string = "&with_watch_providers=";
-const baseReleaseDate: string = "Release Date: ";
+const baseReleaseDate: any = "Release Date: ";
 const providerUrl: string = "/watch/providers?api_key=5f9630b664fee3f1c639e0ae94090867&language=en-us"
 
 const MovieDisplay = (movie: object) => {
@@ -26,25 +27,26 @@ const MovieDisplay = (movie: object) => {
     console.log(query);
     Axios.get(query)
       .then(res => {
-        console.log(res.data.results.US.rent)
+        console.log(res.data.results.US)
       })
       .catch(err => {
         console.log(err);
       })
   }
+  const setGenre = (id: any) => {
+    setGenreId(id);
+    console.log("FROM SETGENRE FUNCTION:", genreId);
+  }
 
-  const movieJeeves = (id: number) => {
+  const movieJeeves = () => {
     let pageNumber: number = Math.floor(Math.random() * 100);
-    let query: any = baseUrl + API_KEY + genreUrl + id + "&page=" + pageNumber;
+    let query: any = baseUrl + API_KEY + genreUrl + genreId + "&page=" + pageNumber;
     let movie: any = {};
     console.log("PAGE NUMBER: ", pageNumber);
     Axios.get(query)
       .then(res => {
-        // console.log(res);
         movie = res.data.results[Math.floor(Math.random() * res.data.results.length)];
         console.log("MOVIE: ", movie);
-        getProviders(movie.id);
-        // setGenreId(movie.id);
         setTitle(movie.original_title);
         setMovieImg(baseImageUrl + movie.poster_path);
         setOverview(movie.overview);
@@ -59,18 +61,20 @@ const MovieDisplay = (movie: object) => {
     return str?.length > n ? str.substr(0, n -1) + ' ...' : str;
   } 
   
-  const formatRelease = (releaseDate: string) => {
+  const formatRelease = (releaseDate: any) => {
     let date = releaseDate.split("-");
     setReleaseDate(baseReleaseDate + date[0]);
   }
 
   return(
     <View style = {styles.container} >
+      <GestureRecognizer onSwipeLeft={(movieJeeves)}>
       <Image style = {styles.movieImage} source={{uri: movieImg }} />
       <Text style = {styles.movieTitle} >{title}</Text>
       <Text style = {styles.releaseDate} >{releaseDate}</Text>
       <Text style = {styles.overview} >{truncate(overview, 300)}</Text>
-      <GenreSelector onPress={(value: number) => movieJeeves(value)} />
+      </GestureRecognizer>
+      <GenreSelector onPress={(value: number) => setGenre(value)} />
     </View>
   )
 };
@@ -78,6 +82,7 @@ const MovieDisplay = (movie: object) => {
 const styles = StyleSheet.create({
   container: {
     alignContent: "center",
+    // backgroundColor: 'pink'
   },
   releaseDate: {
     fontSize: 16,

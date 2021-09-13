@@ -5,7 +5,7 @@ import { View, StyleSheet, Text } from 'react-native';
 const Header = () => {
   return(
     <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>GUMBALL MOVIES</Text>
+      <Text style={styles.headerText}>MOVIE JEEVES</Text>
       <Text style={styles.headerSubText}>Randomize Your Movie Night</Text>
     </View>
   )
@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
   headerText: {
     fontWeight: "bold",
     fontSize: 36,
-    color: '#960dee', 
+    color: 'red', 
   },
   headerSubText: {
     fontWeight: '600',
-    color: '#960dee', 
+    color: 'red', 
     fontSize: 19
   }
 })

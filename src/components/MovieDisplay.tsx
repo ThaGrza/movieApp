@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {View, Image, Text, StyleSheet, Button } from 'react-native';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import GestureRecognizer from 'react-native-swipe-gestures';
 import GenreSelector from './GenreSelector';
 import Axios from 'axios';
 import { API_KEY } from '@env';
@@ -15,6 +15,7 @@ const providerUrl: string = "/watch/providers?api_key=5f9630b664fee3f1c639e0ae94
 
 const MovieDisplay = (movie: object) => {
   const [genreId, setGenreId] = useState();
+  const [genreTitle, setGenreTitle] = useState();
   const [title, setTitle] = useState();
   const [movieImg, setMovieImg] = useState();
   const [overview, setOverview] = useState();
@@ -33,9 +34,13 @@ const MovieDisplay = (movie: object) => {
         console.log(err);
       })
   }
-  const setGenre = (id: any) => {
-    setGenreId(id);
-    console.log("FROM SETGENRE FUNCTION:", genreId);
+  
+  const setGenre = (value: any) => {
+    setGenreId(value.id);
+    setGenreTitle(value.name);
+    // console.log("FROM SETGENRE FUNCTION:", value.name);
+    // console.log("FROM SETGENRE FUNCTION:", value.id);
+
   }
 
   const movieJeeves = () => {
@@ -69,12 +74,13 @@ const MovieDisplay = (movie: object) => {
   return(
     <View style = {styles.container} >
       <GestureRecognizer onSwipeLeft={(movieJeeves)}>
+      <Text style = {styles.movieTitle}>{genreTitle}</Text>
       <Image style = {styles.movieImage} source={{uri: movieImg }} />
       <Text style = {styles.movieTitle} >{title}</Text>
       <Text style = {styles.releaseDate} >{releaseDate}</Text>
       <Text style = {styles.overview} >{truncate(overview, 300)}</Text>
       </GestureRecognizer>
-      <GenreSelector onPress={(value: number) => setGenre(value)} />
+      <GenreSelector onPress={(value: object) => {setGenre(value)}} />
     </View>
   )
 };

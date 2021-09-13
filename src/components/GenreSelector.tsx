@@ -1,3 +1,4 @@
+import { Brightness } from 'expo';
 import React from 'react';
 import { View, StyleSheet, FlatList, SafeAreaView, TouchableHighlight, Text } from 'react-native';
 import genres from '../../assets/genreInfo.json';
@@ -6,11 +7,12 @@ import genres from '../../assets/genreInfo.json';
 
 
 const GenreSelector = (props: any) => {
+
   return(
     <SafeAreaView style={styles.buttonContainer}>
       <FlatList showsHorizontalScrollIndicator={false} horizontal data={genres}
       renderItem={({ item }) => (
-        <TouchableHighlight style={styles.flatList} onPress={event => props.onPress(item.id)}>
+        <TouchableHighlight style={styles.flatList} onPress={(event) =>{props.onPress(item)}}>
           <View>
             <Text style={styles.flatListText}>{item.name}</Text>
           </View>

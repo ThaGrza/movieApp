@@ -17,30 +17,32 @@ const MovieDisplay = (movie: object) => {
   const [genreId, setGenreId] = useState();
   const [genreTitle, setGenreTitle] = useState();
   const [title, setTitle] = useState();
+  // const [provider = [], setProvider] = useState();
   const [movieImg, setMovieImg] = useState();
   const [overview, setOverview] = useState();
   const [releaseDate, setReleaseDate] = useState();
 
 
-  const getProviders = (id: number) => {
-    let providerId: number = id;
-    let query: any = "https://api.themoviedb.org/3/movie/" + providerId + providerUrl;
-    console.log(query);
-    Axios.get(query)
-      .then(res => {
-        console.log(res.data.results.US)
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
+  // const getProviders = (id: number) => {
+  //   var provider: any = [];
+  //   let providerId: number = id;
+  //   let query: any = "https://api.themoviedb.org/3/movie/" + providerId + providerUrl;
+  //   console.log(query);
+  //   Axios.get(query)
+  //     .then(res => {
+  //       let providerArray = res.data.results.US.rent
+  //       providerArray.forEach(function (arrayItem: any){
+  //         console.log(arrayItem.provider_name)
+  //      })
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }
   
   const setGenre = (value: any) => {
     setGenreId(value.id);
     setGenreTitle(value.name);
-    // console.log("FROM SETGENRE FUNCTION:", value.name);
-    // console.log("FROM SETGENRE FUNCTION:", value.id);
-
   }
 
   const movieJeeves = () => {
@@ -52,6 +54,7 @@ const MovieDisplay = (movie: object) => {
       .then(res => {
         movie = res.data.results[Math.floor(Math.random() * res.data.results.length)];
         console.log("MOVIE: ", movie);
+        // getProviders(movie.id);
         setTitle(movie.original_title);
         setMovieImg(baseImageUrl + movie.poster_path);
         setOverview(movie.overview);
@@ -74,11 +77,15 @@ const MovieDisplay = (movie: object) => {
   return(
     <View style = {styles.container} >
       <GestureRecognizer onSwipeLeft={(movieJeeves)}>
-      <Text style = {styles.movieTitle}>{genreTitle}</Text>
+      <Text style = {styles.movieGenreTitle}>{genreTitle}</Text>
       <Image style = {styles.movieImage} source={{uri: movieImg }} />
-      <Text style = {styles.movieTitle} >{title}</Text>
-      <Text style = {styles.releaseDate} >{releaseDate}</Text>
-      <Text style = {styles.overview} >{truncate(overview, 300)}</Text>
+      <View style = {styles.titleContainer }>
+        <Text style = {styles.movieTitle} >{title}</Text>
+        <Text style = {styles.releaseDate} >{releaseDate}</Text>
+      </View>
+      <View style = {styles.overviewContainer }>
+        <Text style = {styles.overview} >{truncate(overview, 230)}</Text>
+      </View>
       </GestureRecognizer>
       <GenreSelector onPress={(value: object) => {setGenre(value)}} />
     </View>
@@ -88,32 +95,45 @@ const MovieDisplay = (movie: object) => {
 const styles = StyleSheet.create({
   container: {
     alignContent: "center",
-    // backgroundColor: 'pink'
+    backgroundColor: "rgb(247, 247, 255)"
+    // backgroundColor: "red",
+
+
+  },
+  titleContainer: {
+    height: 60,
+  },
+  movieTitle: {
+    color: 'rgb(48, 51, 46)',
+    paddingTop: 5,
+    fontSize: 30,
+    fontWeight: "900",
+    textAlign: "center",
   },
   releaseDate: {
     fontSize: 16,
     textAlign: "center",
     fontWeight: "600",
   },
-  movieTitle: {
-    color: '#1c1f1f',
-    height: 40,
-    paddingTop: 5,
-    fontSize: 26,
-    fontWeight: "900",
-    textAlign: "center",
+  movieGenreTitle: {
+    fontWeight: "bold",
+    fontSize: 36,
+    color: 'rgb(60, 132, 180)',
+    textAlign: "center"
   },
-  overview: {
-    height: 250,
-    fontSize: 18,
-    fontWeight: "500",
+  overviewContainer: {
+    height: 270,
     marginTop: 20,
     marginRight: 5,
     marginLeft: 5,
   },
+  overview: {
+    fontSize: 18,
+    lineHeight: 25,
+    fontWeight: "600",
+  },
   movieImage: {
-    marginLeft: "1.5%",
-    marginRight: "1.5%",
+    alignSelf: 'center',
     width: 400,
     height: 400,
   },

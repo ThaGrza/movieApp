@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
     display: 'flex',
   },
   flatList: {
-    backgroundColor: '#ec1b35', 
+    backgroundColor: 'rgb(189, 213, 234)', 
     margin: 5,
     borderRadius: 10,
     padding: 10
   },
   flatListText: {
-    color: 'white',
+    color: 'rgb(73, 88, 103)',
     fontWeight: '600',
     fontSize: 24,
     padding: 5,

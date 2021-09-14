@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     height: '100%',
-    // backgroundColor: '#0dd5ee',
-    backgroundColor: 'white'
+    backgroundColor: 'rgb(247, 247, 255)',
   },
 });
